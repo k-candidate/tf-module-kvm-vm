@@ -17,7 +17,7 @@ variable "image_source" {
 variable "volume_size" {
   description = "The size of the VM disk in bytes."
   type        = number
-  default     = 21474836480 # 20GB = 1024*1024*1024*20
+  default     = 10737418240 # 10GB = 1024*1024*1024*10
 }
 
 variable "use_cloud_init" {
@@ -39,13 +39,13 @@ variable "cloud_init_cfg_filename" {
 variable "memory" {
   description = "The amount of memory for the VM in MB."
   type        = number
-  default     = 2048
+  default     = 1024
 }
 
 variable "vcpu" {
   description = "The number of vCPUs for the VM."
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "network_name" {
