@@ -36,13 +36,13 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloud_init_cfg_filename"></a> [cloud\_init\_cfg\_filename](#input\_cloud\_init\_cfg\_filename) | Filename of the cloud-init cfg file. | `string` | `null` | no |
 | <a name="input_image_source"></a> [image\_source](#input\_image\_source) | Path to local, or HTTP(S) urls for remote image. | `string` | n/a | yes |
-| <a name="input_memory"></a> [memory](#input\_memory) | The amount of memory for the VM in MB. | `number` | `2048` | no |
+| <a name="input_memory"></a> [memory](#input\_memory) | The amount of memory for the VM in MB. | `number` | `1024` | no |
 | <a name="input_network_name"></a> [network\_name](#input\_network\_name) | The name of the network to attach the VM. | `string` | n/a | yes |
 | <a name="input_storage_pool"></a> [storage\_pool](#input\_storage\_pool) | The storage pool where the storage will be created. | `string` | `"default"` | no |
 | <a name="input_use_cloud_init"></a> [use\_cloud\_init](#input\_use\_cloud\_init) | Set to true to use the cloud-init cfg file, false otherwise. | `bool` | `false` | no |
-| <a name="input_vcpu"></a> [vcpu](#input\_vcpu) | The number of vCPUs for the VM. | `number` | `2` | no |
+| <a name="input_vcpu"></a> [vcpu](#input\_vcpu) | The number of vCPUs for the VM. | `number` | `1` | no |
 | <a name="input_vm_name"></a> [vm\_name](#input\_vm\_name) | The name of the virtual machine. | `string` | n/a | yes |
-| <a name="input_volume_size"></a> [volume\_size](#input\_volume\_size) | The size of the VM disk in bytes. | `number` | `21474836480` | no |
+| <a name="input_volume_size"></a> [volume\_size](#input\_volume\_size) | The size of the VM disk in bytes. | `number` | `10737418240` | no |
 
 ## Outputs
 
