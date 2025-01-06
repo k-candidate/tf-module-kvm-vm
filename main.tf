@@ -18,7 +18,7 @@ resource "libvirt_volume" "vm_disk_resized" {
 # Get user data info
 data "template_file" "user_data" {
   count    = var.use_cloud_init ? 1 : 0
-  template = file("${path.module}/${var.cloud_init_cfg_filename}")
+  template = file("${var.cloud_init_cfg_filename}")
 }
 
 # Use cloud-init to add the instance
