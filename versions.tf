@@ -7,8 +7,3 @@ terraform {
     }
   }
 }
-
-provider "libvirt" {
-  # Configuration options
-  uri = var.libvirt_uri
-}

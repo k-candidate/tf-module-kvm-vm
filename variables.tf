@@ -1,9 +1,3 @@
-variable "libvirt_uri" {
-  description = "The URI to connect to the libvirt daemon"
-  type        = string
-  default     = "qemu:///session"
-}
-
 variable "vm_name" {
   description = "The name of the virtual machine."
   type        = string
