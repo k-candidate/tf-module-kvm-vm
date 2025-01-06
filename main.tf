@@ -26,7 +26,7 @@ resource "libvirt_cloudinit_disk" "cloudinit_resized" {
   count     = var.use_cloud_init ? 1 : 0
   name      = "${var.vm_name}-cloudinit.iso"
   pool      = var.storage_pool
-  user_data = data.template_file.user_data.rendered
+  user_data = data.template_file.user_data[0].rendered
 }
 
 # Define KVM domain to create
@@ -36,14 +36,14 @@ resource "libvirt_domain" "vm" {
   vcpu   = var.vcpu
 
   disk {
-    volume_id = var.use_cloud_init ? libvirt_volume.vm_disk_resized.id : libvirt_volume.vm_disk.id
+    volume_id = var.use_cloud_init ? libvirt_volume.vm_disk_resized[0].id : libvirt_volume.vm_disk.id
   }
 
   network_interface {
     network_name = var.network_name
   }
 
-  cloudinit = var.use_cloud_init ? libvirt_cloudinit_disk.cloudinit_resized.id : null
+  cloudinit = var.use_cloud_init ? libvirt_cloudinit_disk.cloudinit_resized[0].id : null
 
   console {
     type        = "pty"
