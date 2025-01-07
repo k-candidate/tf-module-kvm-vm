@@ -36,6 +36,12 @@ variable "cloud_init_cfg_filename" {
   }
 }
 
+variable "cloud_init_vars" {
+  description = "A map of variables to pass to the user data template"
+  type        = map(string)
+  default     = {}
+}
+
 variable "memory" {
   description = "The amount of memory for the VM in MB."
   type        = number
