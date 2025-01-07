@@ -35,6 +35,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloud_init_cfg_filename"></a> [cloud\_init\_cfg\_filename](#input\_cloud\_init\_cfg\_filename) | Filename of the cloud-init cfg file. | `string` | `null` | no |
+| <a name="input_cloud_init_vars"></a> [cloud\_init\_vars](#input\_cloud\_init\_vars) | A map of variables to pass to the user data template | `map(string)` | `{}` | no |
 | <a name="input_image_source"></a> [image\_source](#input\_image\_source) | Path to local, or HTTP(S) urls for remote image. | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The amount of memory for the VM in MB. | `number` | `1024` | no |
 | <a name="input_network_name"></a> [network\_name](#input\_network\_name) | The name of the network to attach the VM. | `string` | n/a | yes |
