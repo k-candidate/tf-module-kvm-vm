@@ -42,6 +42,7 @@ resource "libvirt_domain" "vm" {
 
   network_interface {
     network_name = var.network_name
+    wait_for_lease = true
   }
 
   cloudinit = var.use_cloud_init ? libvirt_cloudinit_disk.cloudinit_resized[0].id : null
