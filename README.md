@@ -7,13 +7,13 @@ Terraform module to create a KVM VM via libvirt
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10.0 |
-| <a name="requirement_libvirt"></a> [libvirt](#requirement\_libvirt) | ~> 0.8.1 |
+| <a name="requirement_libvirt"></a> [libvirt](#requirement\_libvirt) | = 0.7.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_libvirt"></a> [libvirt](#provider\_libvirt) | ~> 0.8.1 |
+| <a name="provider_libvirt"></a> [libvirt](#provider\_libvirt) | = 0.7.1 |
 | <a name="provider_template"></a> [template](#provider\_template) | n/a |
 
 ## Modules
@@ -24,10 +24,10 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [libvirt_cloudinit_disk.cloudinit_resized](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/cloudinit_disk) | resource |
-| [libvirt_domain.vm](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/domain) | resource |
-| [libvirt_volume.vm_disk](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/volume) | resource |
-| [libvirt_volume.vm_disk_resized](https://registry.terraform.io/providers/dmacvicar/libvirt/latest/docs/resources/volume) | resource |
+| [libvirt_cloudinit_disk.cloudinit_resized](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.1/docs/resources/cloudinit_disk) | resource |
+| [libvirt_domain.vm](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.1/docs/resources/domain) | resource |
+| [libvirt_volume.vm_disk](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.1/docs/resources/volume) | resource |
+| [libvirt_volume.vm_disk_resized](https://registry.terraform.io/providers/dmacvicar/libvirt/0.7.1/docs/resources/volume) | resource |
 | [template_file.user_data](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 
 ## Inputs
@@ -47,5 +47,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_ip_address"></a> [ip\_address](#output\_ip\_address) | The IP address of the created VM |
 <!-- END_TF_DOCS -->
