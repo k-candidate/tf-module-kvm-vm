@@ -40,6 +40,32 @@ variable "cloud_init_vars" {
   description = "A map of variables to pass to the user data template"
   type        = map(string)
   default     = {}
+
+  validation {
+    condition = var.use_cloud_init ? (
+      contains(keys(var.cloud_init_vars), "vm_username") &&
+      contains(keys(var.cloud_init_vars), "ssh_public_key")
+    ) : true
+    error_message = "When use_cloud_init is true, cloud_init_vars must include both 'vm_username' and 'ssh_public_key' keys."
+  }
+}
+
+variable "vm_username" {
+  description = "The username for the VM when using cloud-init"
+  type        = string
+  default     = null
+}
+
+variable "ssh_public_key" {
+  description = "The SSH public key for the VM when using cloud-init. Use this variable inside your user-data file."
+  type        = string
+  default     = null
+}
+
+variable "ssh_private_key" {
+  description = "The SSH private key to use to connect to the VM."
+  type        = string
+  default     = null
 }
 
 variable "memory" {

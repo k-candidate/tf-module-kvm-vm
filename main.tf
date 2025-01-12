@@ -22,7 +22,7 @@ data "template_file" "user_data" {
   vars     = var.cloud_init_vars
 }
 
-# Use cloud-init to add the instance
+# Use cloud-init
 resource "libvirt_cloudinit_disk" "cloudinit_resized" {
   count     = var.use_cloud_init ? 1 : 0
   name      = "${var.vm_name}-cloudinit.iso"
@@ -59,3 +59,18 @@ resource "libvirt_domain" "vm" {
     autoport    = "true"
   }
 }
+
+resource "null_resource" "wait_for_cloud_init" {
+  count      = var.use_cloud_init ? 1 : 0
+  depends_on = [resource.libvirt_domain.vm]
+
+  provisioner "local-exec" {
+    command = <<-EOF
+      ssh -o StrictHostKeyChecking=no \
+      -i '${var.ssh_private_key}' \
+      '${var.vm_username}'@'${libvirt_domain.vm.network_interface[0].addresses[0]}' \
+      cloud-init status --wait --long
+    EOF
+  }
+}
+
