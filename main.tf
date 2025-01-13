@@ -22,7 +22,7 @@ data "template_file" "user_data" {
   vars     = var.cloud_init_vars
 }
 
-# Use cloud-init to add the instance
+# Use cloud-init
 resource "libvirt_cloudinit_disk" "cloudinit_resized" {
   count     = var.use_cloud_init ? 1 : 0
   name      = "${var.vm_name}-cloudinit.iso"
@@ -57,5 +57,50 @@ resource "libvirt_domain" "vm" {
     type        = "spice"
     listen_type = "address"
     autoport    = "true"
+  }
+}
+
+resource "null_resource" "wait_for_cloud_init" {
+  count      = var.use_cloud_init ? 1 : 0
+  depends_on = [resource.libvirt_domain.vm]
+
+  provisioner "local-exec" {
+    command = <<-EOF
+      ssh -o StrictHostKeyChecking=no \
+      -i '${var.ssh_private_key}' \
+      '${var.vm_username}'@'${libvirt_domain.vm.network_interface[0].addresses[0]}' \
+      cloud-init status --wait --long
+    EOF
+  }
+}
+
+resource "null_resource" "run_ansible" {
+  count = var.use_ansible ? 1 : 0
+  depends_on = [
+    resource.libvirt_domain.vm,
+    null_resource.wait_for_cloud_init
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = var.vm_username
+    private_key = file(var.ssh_private_key)
+    host        = libvirt_domain.vm.network_interface[0].addresses[0]
+  }
+
+  provisioner "remote-exec" {
+    inline = ["echo 'VM is ready'"]
+  }
+
+  triggers = {
+    playbook_hash = filesha512("${var.ansible_dir}/${var.playbook}")
+  }
+
+  provisioner "local-exec" {
+    working_dir = var.ansible_dir
+    command     = <<-EOT
+      ansible-playbook -u ${var.vm_username} -i '${libvirt_domain.vm.network_interface[0].addresses[0]},' '${var.playbook}' \
+      ${var.extra_vars != {} ? "--extra-vars='${jsonencode(var.extra_vars)}'" : ""}
+    EOT
   }
 }
