@@ -84,3 +84,32 @@ variable "network_name" {
   description = "The name of the network to attach the VM."
   type        = string
 }
+
+variable "use_ansible" {
+  description = "Set to true to run Ansible, false otherwise."
+  type        = bool
+  default     = false
+}
+
+variable "ansible_dir" {
+  description = "Directory where Ansible files are located"
+  type        = string
+  default     = "ansible"
+}
+
+variable "playbook" {
+  description = "Ansible playbook filename"
+  type        = string
+  default     = "playbook.yml"
+}
+
+variable "extra_vars" {
+  description = "Optional Ansible extra variables to pass to the playbook"
+  type        = map(any)
+  default     = {}
+
+  validation {
+    condition     = length(keys(var.extra_vars)) == length(distinct(keys(var.extra_vars)))
+    error_message = "Duplicate keys are not allowed in 'extra_vars'"
+  }
+}

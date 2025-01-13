@@ -74,3 +74,33 @@ resource "null_resource" "wait_for_cloud_init" {
   }
 }
 
+resource "null_resource" "run_ansible" {
+  count = var.use_ansible ? 1 : 0
+  depends_on = [
+    resource.libvirt_domain.vm,
+    null_resource.wait_for_cloud_init
+  ]
+
+  connection {
+    type        = "ssh"
+    user        = var.vm_username
+    private_key = file(var.ssh_private_key)
+    host        = libvirt_domain.vm.network_interface[0].addresses[0]
+  }
+
+  provisioner "remote-exec" {
+    inline = ["echo 'VM is ready'"]
+  }
+
+  triggers = {
+    playbook_hash = filesha512("${var.ansible_dir}/${var.playbook}")
+  }
+
+  provisioner "local-exec" {
+    working_dir = var.ansible_dir
+    command     = <<-EOT
+      ansible-playbook -u ${var.vm_username} -i '${libvirt_domain.vm.network_interface[0].addresses[0]},' '${var.playbook}' \
+      ${var.extra_vars != {} ? "--extra-vars='${jsonencode(var.extra_vars)}'" : ""}
+    EOT
+  }
+}
