@@ -103,6 +103,12 @@ variable "playbook" {
   default     = "playbook.yml"
 }
 
+variable "ansible_requirements" {
+  description = "Ansible requirements filename. It should be inside the ansible_dir directory"
+  type        = string
+  default     = "requirements.yml"
+}
+
 variable "extra_vars" {
   description = "Optional Ansible extra variables to pass to the playbook"
   type        = map(any)

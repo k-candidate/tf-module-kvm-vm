@@ -93,12 +93,16 @@ resource "null_resource" "run_ansible" {
   }
 
   triggers = {
-    playbook_hash = filesha512("${var.ansible_dir}/${var.playbook}")
+    playbook_hash     = filesha512("${var.ansible_dir}/${var.playbook}")
+    requirements_hash = fileexists("${var.ansible_dir}/${var.ansible_requirements}") ? filesha512("${var.ansible_dir}/${var.ansible_requirements}") : "no_requirements"
   }
 
   provisioner "local-exec" {
     working_dir = var.ansible_dir
     command     = <<-EOT
+      if [ -f "${var.ansible_requirements}" ]; then
+        ansible-galaxy install -r ${var.ansible_requirements}
+      fi
       ansible-playbook -u ${var.vm_username} -i '${libvirt_domain.vm.network_interface[0].addresses[0]},' '${var.playbook}' \
       ${var.extra_vars != {} ? "--extra-vars='${jsonencode(var.extra_vars)}'" : ""}
     EOT
