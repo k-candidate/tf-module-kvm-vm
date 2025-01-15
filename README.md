@@ -38,6 +38,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_ansible_dir"></a> [ansible\_dir](#input\_ansible\_dir) | Directory where Ansible files are located | `string` | `"ansible"` | no |
+| <a name="input_ansible_requirements"></a> [ansible\_requirements](#input\_ansible\_requirements) | Ansible requirements filename. It should be inside the ansible\_dir directory | `string` | `"requirements.yml"` | no |
 | <a name="input_cloud_init_cfg_filename"></a> [cloud\_init\_cfg\_filename](#input\_cloud\_init\_cfg\_filename) | Filename of the cloud-init cfg file. | `string` | `null` | no |
 | <a name="input_cloud_init_vars"></a> [cloud\_init\_vars](#input\_cloud\_init\_vars) | A map of variables to pass to the user data template | `map(string)` | `{}` | no |
 | <a name="input_extra_vars"></a> [extra\_vars](#input\_extra\_vars) | Optional Ansible extra variables to pass to the playbook | `map(any)` | `{}` | no |
