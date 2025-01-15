@@ -93,8 +93,7 @@ resource "null_resource" "run_ansible" {
   }
 
   triggers = {
-    playbook_hash     = filesha512("${var.ansible_dir}/${var.playbook}")
-    requirements_hash = fileexists("${var.ansible_dir}/${var.ansible_requirements}") ? filesha512("${var.ansible_dir}/${var.ansible_requirements}") : "no_requirements"
+    ansible_dir_hash = sha256(join("", [for f in fileset(var.ansible_dir, "**"): filesha256("${var.ansible_dir}/${f}")]))
   }
 
   provisioner "local-exec" {
