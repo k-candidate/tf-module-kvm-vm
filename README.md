@@ -1,5 +1,9 @@
 # tf-module-kvm-vm
-Terraform module to create a KVM VM via libvirt 
+Terraform module to create a KVM VM via libvirt.
+
+Examples:
+- [https://github.com/k-candidate/tf-nfs](https://github.com/k-candidate/tf-nfs)
+- [https://github.com/k-candidate/tf-jenkins-as-code](https://github.com/k-candidate/tf-jenkins-as-code)
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
