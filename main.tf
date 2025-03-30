@@ -36,6 +36,13 @@ resource "libvirt_domain" "vm" {
   memory = var.memory
   vcpu   = var.vcpu
 
+  dynamic "cpu" {
+    for_each = var.enable_cpu_passthrough ? [1] : []
+    content {
+      mode = "host-passthrough"
+    }
+  }
+
   disk {
     volume_id = var.use_cloud_init ? libvirt_volume.vm_disk_resized[0].id : libvirt_volume.vm_disk.id
   }

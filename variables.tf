@@ -80,6 +80,12 @@ variable "vcpu" {
   default     = 1
 }
 
+variable "enable_cpu_passthrough" {
+  description = "Enable CPU host passthrough mode"
+  type        = bool
+  default     = false
+}
+
 variable "network_name" {
   description = "The name of the network to attach the VM."
   type        = string
