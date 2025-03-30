@@ -45,6 +45,7 @@ No modules.
 | <a name="input_ansible_requirements"></a> [ansible\_requirements](#input\_ansible\_requirements) | Ansible requirements filename. It should be inside the ansible\_dir directory | `string` | `"requirements.yml"` | no |
 | <a name="input_cloud_init_cfg_filename"></a> [cloud\_init\_cfg\_filename](#input\_cloud\_init\_cfg\_filename) | Filename of the cloud-init cfg file. | `string` | `null` | no |
 | <a name="input_cloud_init_vars"></a> [cloud\_init\_vars](#input\_cloud\_init\_vars) | A map of variables to pass to the user data template | `map(string)` | `{}` | no |
+| <a name="input_enable_cpu_passthrough"></a> [enable\_cpu\_passthrough](#input\_enable\_cpu\_passthrough) | Enable CPU host passthrough mode | `bool` | `false` | no |
 | <a name="input_extra_vars"></a> [extra\_vars](#input\_extra\_vars) | Optional Ansible extra variables to pass to the playbook | `map(any)` | `{}` | no |
 | <a name="input_image_source"></a> [image\_source](#input\_image\_source) | Path to local, or HTTP(S) urls for remote image. | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The amount of memory for the VM in MB. | `number` | `1024` | no |
@@ -62,7 +63,5 @@ No modules.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_ip_address"></a> [ip\_address](#output\_ip\_address) | The IP address of the created VM |
+No outputs.
 <!-- END_TF_DOCS -->
